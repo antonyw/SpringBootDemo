@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="me.anthony.mapper.CitiesMapper">
+    <select id="selectWithCountry" parameterType="java.util.Map" resultType="me.anthony.entity.Cities">
+        SELECT c.city,co.country
+        FROM cities c
+        LEFT JOIN countries co ON c.country_id=co.country_id
+        <where>
+            <if test="city_id != null and city_id != -1">
+                and c.city_id = #{city_id}
+            </if>
+            <if test="country_id != null and country_id != -1">
+                and c.country_id = #{country_id}
+            </if>
+        </where>
+    </select>
+</mapper>
