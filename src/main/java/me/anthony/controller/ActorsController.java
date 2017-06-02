@@ -1,7 +1,6 @@
 package me.anthony.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.google.code.kaptcha.Producer;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import me.anthony.service.ActorsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +44,4 @@ public class ActorsController {
             out.close();
         }
     }
-
 }
