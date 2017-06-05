@@ -17,10 +17,6 @@
 
     <repositories>
         <repository>
-            <id>thirdparty</id>
-            <url>http://10.19.4.16:8081/nexus/content/repositories/public</url>
-        </repository>
-        <repository>
             <name>osc Repository</name>
             <id>osc_thirdparty</id>
             <url>http://maven.oschina.net/content/repositories/thirdparty/</url>
