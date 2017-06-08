@@ -5,35 +5,38 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Anthony on 2017/6/2.
+ * Created by Anthony on 2017/6/8.
  */
-public class KaptchaFilter extends FormAuthenticationFilter {
+public class CaptchaFilter extends FormAuthenticationFilter {
+
+    private Logger logger = LoggerFactory.getLogger(getClass().getPackage().getName());
 
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         UsernamePasswordCaptchaToken token = createToken(request, response);
-        String username = token.getUsername();
         try {
-            doValidateCaptcha((HttpServletRequest) request, token);
+            doCaptchaValidate((HttpServletRequest) request, token);
             Subject subject = getSubject(request, response);
             subject.login(token);//正常验证
-            //到这里就算验证成功了,把用户信息放到session中
-            ((HttpServletRequest) request).getSession().setAttribute("name", username);
-
             return onLoginSuccess(token, subject, request, response);
         } catch (AuthenticationException e) {
             return onLoginFailure(token, e, request, response);
         }
     }
 
-    private void doValidateCaptcha(HttpServletRequest request, UsernamePasswordCaptchaToken token) {
+    // 验证码校验
+    private void doCaptchaValidate(HttpServletRequest request, UsernamePasswordCaptchaToken token) {
         String captcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        logger.info("captcha:" + captcha);
+        //比对
         if (captcha == null || !captcha.equalsIgnoreCase(token.getCaptcha())) {
             throw new CaptchaException("验证码错误");
         }
@@ -43,19 +46,13 @@ public class KaptchaFilter extends FormAuthenticationFilter {
     protected UsernamePasswordCaptchaToken createToken(ServletRequest request, ServletResponse response) {
         String username = getUsername(request);
         String password = getPassword(request);
-        String captcha = getCaptcha(request);
         boolean rememberMe = isRememberMe(request);
         String host = getHost(request);
+        String captcha = getCaptcha(request);
         return new UsernamePasswordCaptchaToken(username, password, rememberMe, host, captcha);
     }
 
     private String getCaptcha(ServletRequest request) {
-        return WebUtils.getCleanParam(request, "captcha"); //对应页面输入验证码的input的name值
-    }
-
-    //保存异常对象到request
-    @Override
-    protected void setFailureAttribute(ServletRequest request, AuthenticationException ae) {
-        request.setAttribute(getFailureKeyAttribute(), ae);
+        return WebUtils.getCleanParam(request, "captcha");//对应HTML页面中验证码输入框的name
     }
 }

@@ -1,5 +1,7 @@
 package me.anthony.controller;
 
+import me.anthony.conf.shiro.CaptchaException;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.slf4j.Logger;
@@ -18,8 +20,11 @@ public class PageController {
 
     private Logger logger = LoggerFactory.getLogger(getClass().getPackage().getName());
 
-    @RequestMapping("/login.html")
+    @RequestMapping("/login")
     public String login(HttpServletRequest request, Model model) {
+        if (SecurityUtils.getSubject().isAuthenticated()) {
+            SecurityUtils.getSubject().logout();
+        }
         // 登录失败从request中获取shiro处理的异常信息，shiroLoginFailure:就是shiro异常类的全类名.
         String exception = (String) request.getAttribute("shiroLoginFailure");
         logger.debug("Shiro Exception:" + exception);
@@ -31,7 +36,7 @@ public class PageController {
             } else if (IncorrectCredentialsException.class.getName().equals(exception)) {
                 logger.debug("IncorrectCredentialsException -- > 密码不正确：");
                 msg = "密码不正确";
-            } else if ("CaptchaException".equals(exception)) {
+            } else if (CaptchaException.class.getName().equals(exception)) {
                 logger.debug("CaptchaException -- > 验证码错误");
                 msg = "验证码错误";
             } else {
@@ -41,6 +46,11 @@ public class PageController {
         }
         model.addAttribute("err", msg);
         return "login";
+    }
+
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
     }
 
 }

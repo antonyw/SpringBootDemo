@@ -27,11 +27,6 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countsql
-shiro:
-  successUrl: /index.html
-  loginUrl: /login.html
-  sessionManager:
-    sessionIdUrlRewritingEnabled: false
 logging:
 # 该配置文件主要用于每天一份日志文件的分割
 #  config: classpath:logback-spring.xml

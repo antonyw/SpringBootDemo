@@ -10,7 +10,8 @@
     密码：<input type="password" name="password"/><br/>
     <img src="/user/captcha"/><br/>
     验证码：<input type="text" maxlength="4" name="captcha"/><br/>
-    <div th:text="${err}"></div><br/>
+    <span th:text="${err}"></span><br/>
+    记住我：<input type="checkbox" name="remeberMe"/><br/>
     <input type="submit" value="登录"/>
 </form>
 </body>
