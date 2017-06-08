@@ -1,5 +1,5 @@
 # Spring Boot 集成Web开发常用库
-_项目用于记录各三方库的集成方法，故没有采用微服务架构_
+_项目用于记录各三方库的集成方法，故没有采用微服务架构.并且使用war包部署。_
 #### 项目依赖
 - [Spring Boot 1.5.3.RELEASE](https://github.com/spring-projects/spring-boot)
 - [thymeleaf](http://www.thymeleaf.org/)
