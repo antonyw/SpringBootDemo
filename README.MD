@@ -10,6 +10,7 @@ _使用war包部署_
 - [分页插件](https://github.com/pagehelper/pagehelper-spring-boot)
 - [验证码](https://github.com/penggle/kaptcha)
 - [Druid 1.0.27](https://github.com/alibaba/druid)
+- [Shiro](https://github.com/apache/shiro)
 #### 通用Mapper的用法
 - 接口方式
 
