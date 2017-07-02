@@ -55,9 +55,11 @@ UserMapper userMapper;
     </select>
 </mapper>
 ```
-2. 注入sqlSession
+2. 映射接口里的函数
 ```java
-@Autowired
-SqlSession sqlSession;
-sqlSession.selectList("selectWithCountry");
+public interface CitiesMapper extends Mapper<Cities> {
+
+    List<Cities> selectWithCountry(Map<String, Object> param);
+}
 ```
+3. 同上第三步

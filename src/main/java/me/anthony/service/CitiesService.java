@@ -2,6 +2,7 @@ package me.anthony.service;
 
 import com.github.pagehelper.PageHelper;
 import me.anthony.entity.Cities;
+import me.anthony.mapper.CitiesMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,13 @@ import java.util.Map;
 public class CitiesService {
 
     @Autowired
-    private SqlSession sqlSession;
+    private CitiesMapper citiesMapper;
 
     public List<Cities> selectWithCountry(Map<String, Object> param) {
         if (param != null && param.get("page") != null) {
             PageHelper.startPage(Integer.parseInt(param.get("page").toString()), 10);
         }
-        return sqlSession.selectList("selectWithCountry", param);
+        return citiesMapper.selectWithCountry(param);
     }
 
 }
