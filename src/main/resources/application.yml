@@ -9,10 +9,10 @@ spring:
       stat-view-servlet:
         login-username: admin
         login-password: 123456
-        url-pattern: /*
         reset-enable: false
       web-stat-filter:
-        exclusions: *.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
+        exclusions: /druid/*
+        url-pattern: /*
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
