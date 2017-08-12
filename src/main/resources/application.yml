@@ -5,9 +5,14 @@ spring:
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    maxActive: 20
-    initialSize: 1
-    maxWait: 60000
+    druid:
+      stat-view-servlet:
+        login-username: admin
+        login-password: 123456
+        url-pattern: /*
+        reset-enable: false
+      web-stat-filter:
+        exclusions: *.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
   thymeleaf:
     cache: false
     prefix: classpath:/templates/

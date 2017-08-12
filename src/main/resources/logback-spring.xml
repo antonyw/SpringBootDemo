@@ -7,9 +7,9 @@
     </appender>
 
     <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/usr/soft/shiptracker_logs/ship_tracker.log</file>
+        <file>/usr/soft/logs/springdemo.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/usr/soft/shiptracker_logs/ship_tracker.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>/usr/soft/logs/springdemo.%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>%d{HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
