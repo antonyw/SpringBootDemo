@@ -64,7 +64,7 @@ public interface CitiesMapper extends Mapper<Cities> {
 ```
 3. 同上第三步
 ## 关于Druid监控
-使用1.1.0版本Druid，当前工程使用admin/123456作为登录用户名和密码。
+使用1.1.0版本Druid，当前工程使用admin/123456作为登录用户名和密码，本地启动的访问地址http://localhost:8080/druid
 
 需要导入两个依赖
 ```xml
