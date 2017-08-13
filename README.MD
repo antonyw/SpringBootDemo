@@ -2,16 +2,16 @@
 _项目用于记录各三方库的集成方法，故没有采用微服务架构_
 
 _使用war包部署_
-#### 项目依赖
+## 项目依赖
 - [Spring Boot 1.5.3.RELEASE](https://github.com/spring-projects/spring-boot)
 - [thymeleaf](http://www.thymeleaf.org/)
 - [MyBatis](http://www.mybatis.org/mybatis-3/)
 - [通用Mapper](https://github.com/abel533/Mapper)
 - [分页插件](https://github.com/pagehelper/pagehelper-spring-boot)
 - [验证码](https://github.com/penggle/kaptcha)
-- [Druid 1.0.27](https://github.com/alibaba/druid)
+- [Druid 1.1.0](https://github.com/alibaba/druid)
 - [Shiro](https://github.com/apache/shiro)
-#### 通用Mapper的用法
+## 通用Mapper的用法
 - 接口方式
 
 通常简单SQL可以使用此类方法，部分复杂SQL可以使用带Example的查询方法。（Example方法可以查看[通用Mapper文档](https://github.com/abel533/Mapper)）
@@ -63,3 +63,20 @@ public interface CitiesMapper extends Mapper<Cities> {
 }
 ```
 3. 同上第三步
+## 关于Druid监控
+使用1.1.0版本Druid，当前工程使用admin/123456作为登录用户名和密码。
+
+需要导入两个依赖
+```xml
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.1.0</version>
+</dependency>
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid-spring-boot-starter</artifactId>
+    <version>1.1.0</version>
+</dependency>
+```
+因为starter依赖，我们可以在application.yml中直接配置相关信息。
