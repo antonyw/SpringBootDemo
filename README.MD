@@ -80,3 +80,21 @@ public interface CitiesMapper extends Mapper<Cities> {
 </dependency>
 ```
 因为starter依赖，我们可以在application.yml中直接配置相关信息。
+
+## 关闭thymeleaf标签校验
+thymeleaf具有非常严格的标签校验规则，这很符合国际标准的HTML格式，但在实际的开发过程中却影响了开发的效率。
+
+1. 在application.yml中配置
+```yml
+thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+```
+2. 在POM中配置下面这个依赖
+```xml
+<dependency>
+    <groupId>net.sourceforge.nekohtml</groupId>
+    <artifactId>nekohtml</artifactId>
+    <version>1.9.22</version>
+</dependency>
+```
