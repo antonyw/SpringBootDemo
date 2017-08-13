@@ -17,7 +17,7 @@ spring:
     cache: false
     prefix: classpath:/templates/
     suffix: .html
-    mode: HTML5
+    mode: LEGACYHTML5
     content-type: text/html
   redis:
     database: 0
